@@ -75,7 +75,7 @@ function Create() {
   const [input, setInput] = useState(''); // '' is the initial state value
   let onSubmit = function (e) {
     // console.log(input, result)
-    navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = ${window.location.host}/meet?id=${f.key`);
+    navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = ${window.location.host}/meet?id=${f.key}`);
     alert(`Data tersalin`);
   }
   var f = firepadRef;
