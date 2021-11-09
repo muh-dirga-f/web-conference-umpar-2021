@@ -100,7 +100,7 @@ function Create() {
       </div>
     </div>
     <br /><button onClick={onSubmit} className="btn btn-primary">Salin</button><span />
-    {/* <a className="btn btn-success" href={wares} data-action="share/whatsapp/share">Share via Whatsapp</a> */}
+    <a className="btn btn-success" href={wares} data-action="share/whatsapp/share">Share via Whatsapp</a>
   </div>;
 }
 
