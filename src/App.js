@@ -52,7 +52,7 @@ function Home() {
   const [input, setInput] = useState(''); // '' is the initial state value
   let onSubmit = function (e) {
     // console.log(input)
-    window.location.href = window.location.host + "/meet?id=" + input
+    window.location.href = "/meet?id=" + input
   }
   return <div>
     <h2><u>Home</u></h2>
