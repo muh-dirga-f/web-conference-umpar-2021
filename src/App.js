@@ -75,7 +75,7 @@ function Create() {
   const [input, setInput] = useState(''); // '' is the initial state value
   let onSubmit = function (e) {
     // console.log(input, result)
-    navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}`);
+    navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = ${window.location.host}/meet?id=${f.key`);
     alert(`Data tersalin`);
   }
   var f = firepadRef;
@@ -83,7 +83,7 @@ function Create() {
 
   var result = f.key;
   // var result = window.location.host + "/meet?id=" + f.key;
-  var wares = `whatsapp://send?text=Topik = ${input}%0aID Room = ${result}`;
+  var wares = `whatsapp://send?text=Topik = ${input}%0aID Room = ${result}%0aLink = ${window.location.host}/meet?id=${f.key}`;
   // console.log(window.location.pathname)
   return <div>
     <h2><u>Create Room</u></h2>
