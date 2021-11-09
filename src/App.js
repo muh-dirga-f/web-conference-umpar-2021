@@ -83,7 +83,7 @@ function Create() {
 
   var result = f.key;
   // var result = window.location.host + "/meet?id=" + f.key;
-  var wares = `whatsapp://send?text=Topik = ${input}\x0DID Room = ${result}`;
+  var wares = `whatsapp://send?text=Topik = ${input}\x0D\nID Room = ${result}`;
   // console.log(window.location.pathname)
   return <div>
     <h2><u>Create Room</u></h2>
