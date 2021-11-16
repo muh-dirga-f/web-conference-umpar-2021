@@ -32,6 +32,9 @@ function MainMenu() {
               <li className="nav-item">
                 <Link className="nav-link" to="/create">Create</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Logout</Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -74,17 +77,27 @@ function Home() {
 function Create() {
   const [input, setInput] = useState(''); // '' is the initial state value
   let onSubmit = function (e) {
-    // console.log(input, result)
-    navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = ${window.location.host}/meet?id=${f.key}`);
-    alert(`Data tersalin`);
+    if(input == ""){
+      alert("Topik belum diinput!")
+    }else{
+      navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = ${window.location.host}/meet?id=${f.key}`);
+      alert(`Data tersalin`);
+    }
   }
+  
+  let waShare = function (e) {
+    var url = `whatsapp://send?text=Topik = ${input}%0aID Room = ${result}%0aLink = https://${window.location.host}/meet?id=${f.key}`;
+    if(input == ""){
+      alert("Topik belum diinput!")
+    }else{
+      window.open(url, '_blank').focus();
+    }
+  }
+
   var f = firepadRef;
   f = f.push();
 
   var result = f.key;
-  // var result = window.location.host + "/meet?id=" + f.key;
-  var wares = `whatsapp://send?text=Topik = ${input}%0aID Room = ${result}%0aLink = https://${window.location.host}/meet?id=${f.key}`;
-  // console.log(window.location)
   return <div>
     <h2><u>Create Room</u></h2>
     <div className="row">
@@ -100,7 +113,7 @@ function Create() {
       </div>
     </div>
     <br /><button onClick={onSubmit} className="btn btn-primary">Salin</button><span />
-    <a className="btn btn-success" href={wares} data-action="share/whatsapp/share">Share via Whatsapp</a>
+    <button onClick={waShare} className="btn btn-success">Share via Whatsapp</button>
   </div>;
 }
 
