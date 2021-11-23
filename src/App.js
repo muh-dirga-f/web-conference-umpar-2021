@@ -11,6 +11,7 @@ import Meet from "./Meet";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 function MainMenu() {
   return (
@@ -75,21 +76,21 @@ function Home() {
 }
 
 function Create() {
-  const [input, setInput] = useState(''); // '' is the initial state value
+  const [input, setInput] = useState('');
   let onSubmit = function (e) {
-    if(input == ""){
+    if (input == "") {
       alert("Topik belum diinput!")
-    }else{
+    } else {
       navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = https://${window.location.host}/meet?id=${f.key}`);
       alert(`Data tersalin`);
     }
   }
-  
+
   let waShare = function (e) {
     var url = `whatsapp://send?text=Topik = ${input}%0aID Room = ${result}%0aLink = https://${window.location.host}/meet?id=${f.key}`;
-    if(input == ""){
+    if (input == "") {
       alert("Topik belum diinput!")
-    }else{
+    } else {
       window.open(url, '_blank').focus();
     }
   }
@@ -112,8 +113,12 @@ function Create() {
         </div>
       </div>
     </div>
-    <br /><button onClick={onSubmit} className="btn btn-primary">Salin</button><span />
-    <button onClick={waShare} className="btn btn-success">Share via Whatsapp</button>
+    <BrowserView>
+      <br /><button onClick={onSubmit} className="btn btn-primary">Salin</button>
+    </BrowserView>
+    <MobileView>
+      <br /><button onClick={waShare} className="btn btn-success">Share via Whatsapp</button>
+    </MobileView>
   </div>;
 }
 
