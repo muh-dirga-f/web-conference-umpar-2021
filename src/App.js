@@ -80,7 +80,7 @@ function Create() {
     if(input == ""){
       alert("Topik belum diinput!")
     }else{
-      navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = ${window.location.host}/meet?id=${f.key}`);
+      navigator.clipboard.writeText(`Topik = ${input}\x0DID Room = ${result}\x0DLink = https://${window.location.host}/meet?id=${f.key}`);
       alert(`Data tersalin`);
     }
   }
