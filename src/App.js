@@ -76,7 +76,7 @@ function Home() {
 }
 
 function Create() {
-  const [input, setInput] = useState(''); // '' is the initial state value
+  const [input, setInput] = useState('');
   let onSubmit = function (e) {
     if (input == "") {
       alert("Topik belum diinput!")
