@@ -1,7 +1,7 @@
 {
     "theme_color": "#f0ece8",
     "background_color": "#ffffff",
-    "display": "minimal-ui",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Web Conference 2021",
