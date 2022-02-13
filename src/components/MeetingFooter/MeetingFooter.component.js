@@ -6,6 +6,7 @@ import {
   faDesktop,
   faVideoSlash,
   faMicrophoneSlash,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
@@ -35,6 +36,10 @@ const MeetingFooter = (props) => {
 
   const onScreenClick = () => {
     props.onScreenClick(setScreenState);
+  };
+  
+  const onSignOutClick = () => {
+    window.location.href = "/";
   };
 
   const setScreenState = (isEnabled) => {
@@ -78,6 +83,13 @@ const MeetingFooter = (props) => {
           disabled={streamState.screen}
         >
           <FontAwesomeIcon icon={faDesktop} />
+        </div>
+        <div
+          className="meeting-icons"
+          data-tip="Leave Meeting"
+          onClick={onSignOutClick}
+        >
+          <FontAwesomeIcon icon={faSignOutAlt} />
         </div>
         <ReactTooltip />
       </div>

@@ -33,9 +33,6 @@ function MainMenu() {
               <li className="nav-item">
                 <Link className="nav-link" to="/create">Create</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/">Logout</Link>
-              </li>
             </ul>
           </div>
         </div>
