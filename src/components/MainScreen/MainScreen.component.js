@@ -3,14 +3,18 @@ import MeetingFooter from "../MeetingFooter/MeetingFooter.component";
 import Participants from "../Participants/Participants.component";
 import "./MainScreen.css";
 import { connect } from "react-redux";
-import { setMainStream, updateUser } from "../../store/actioncreator";
+import { setCanvasStream, setMainStream, updateUser } from "../../store/actioncreator";
 
 const MainScreen = (props) => {
   const participantRef = useRef(props.participants);
 
   const onMicClick = (micEnabled) => {
     if (props.stream) {
-      props.stream.getAudioTracks()[0].enabled = micEnabled;
+      if(props.stream.getAudioTracks()[0]){
+        props.stream.getAudioTracks()[0].enabled = micEnabled;
+      }else{
+        props.stream.getAudioTracks().enabled = micEnabled;
+      }
       props.updateUser({ audio: micEnabled });
     }
   };
@@ -18,6 +22,17 @@ const MainScreen = (props) => {
     if (props.stream) {
       props.stream.getVideoTracks()[0].enabled = videoEnabled;
       props.updateUser({ video: videoEnabled });
+    }
+  };
+  const onRemBGClick = async () => {
+    if (props.stream.getVideoTracks()[0].enabled) {
+      updateStream(props.canvasStream);
+    }else{
+      const localStream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true,
+      });
+      updateStream(localStream);
     }
   };
 
@@ -83,6 +98,7 @@ const MainScreen = (props) => {
           onScreenClick={onScreenClick}
           onMicClick={onMicClick}
           onVideoClick={onVideoClick}
+          onRemBGClick={onRemBGClick}
         />
       </div>
     </div>
@@ -92,6 +108,7 @@ const MainScreen = (props) => {
 const mapStateToProps = (state) => {
   return {
     stream: state.mainStream,
+    canvasStream: state.canvasStream,
     participants: state.participants,
     currentUser: state.currentUser,
   };
@@ -100,6 +117,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setMainStream: (stream) => dispatch(setMainStream(stream)),
+    setCanvasStream: (stream) => dispatch(setCanvasStream(stream)),
     updateUser: (user) => dispatch(updateUser(user)),
   };
 };

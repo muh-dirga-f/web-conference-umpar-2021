@@ -96,6 +96,7 @@ const mapStateToProps = (state) => {
     participants: state.participants,
     currentUser: state.currentUser,
     stream: state.mainStream,
+    canvasStream: state.canvasStream,
   };
 };
 

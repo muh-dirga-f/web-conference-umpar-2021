@@ -16,6 +16,15 @@ export const setMainStream = (stream) => {
   };
 };
 
+export const setCanvasStream = (stream) => {
+  return {
+    type: SET_MAIN_STREAM,
+    payload: {
+      canvasStream: stream,
+    },
+  };
+};
+
 export const setUser = (user) => {
   return {
     type: SET_USER,

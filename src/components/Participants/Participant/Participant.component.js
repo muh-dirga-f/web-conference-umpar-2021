@@ -44,6 +44,7 @@ export const Participant = (props) => {
           {currentUser ? "(You)" : ""}
         </div>
       </Card>
+
     </div>
   );
 };

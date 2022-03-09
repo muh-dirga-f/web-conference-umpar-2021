@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrophone,
@@ -7,10 +7,12 @@ import {
   faVideoSlash,
   faMicrophoneSlash,
   faSignOutAlt,
+  faWindowMaximize,
 } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
 const MeetingFooter = (props) => {
+  const inputElement = useRef();
   const [streamState, setStreamState] = useState({
     mic: true,
     video: false,
@@ -37,6 +39,11 @@ const MeetingFooter = (props) => {
   const onScreenClick = () => {
     props.onScreenClick(setScreenState);
   };
+
+  const onRemBGClick = () => {
+    props.onRemBGClick(setRemBGClick);
+    inputElement.current.click();
+  };
   
   const onSignOutClick = () => {
     window.location.href = "/";
@@ -47,6 +54,14 @@ const MeetingFooter = (props) => {
       return {
         ...currentState,
         screen: isEnabled,
+      };
+    });
+  };
+  const setRemBGClick = (isEnabled) => {
+    setStreamState((currentState) => {
+      return {
+        ...currentState,
+        video: isEnabled,
       };
     });
   };
@@ -73,6 +88,7 @@ const MeetingFooter = (props) => {
           className={"meeting-icons " + (!streamState.video ? "active" : "")}
           data-tip={streamState.video ? "Hide Video" : "Show Video"}
           onClick={onVideoClick}
+          ref={inputElement}
         >
           <FontAwesomeIcon icon={!streamState.video ? faVideoSlash : faVideo} />
         </div>
@@ -83,6 +99,13 @@ const MeetingFooter = (props) => {
           disabled={streamState.screen}
         >
           <FontAwesomeIcon icon={faDesktop} />
+        </div>
+        <div
+          className="meeting-icons"
+          data-tip="Virtual Background"
+          onClick={onRemBGClick}
+        >
+          <FontAwesomeIcon icon={faWindowMaximize} />
         </div>
         <div
           className="meeting-icons"
