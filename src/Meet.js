@@ -29,7 +29,7 @@ function Meet(props) {
   useEffect(async () => {
     contextRef.current = canvasRef.current.getContext("2d");
     
-    const canvasStream = canvasRef.current.captureStream();
+    const canvasStream = canvasRef.current.captureStream(15);
     canvasStream.getVideoTracks()[0].enabled = false;
     props.setCanvasStream(canvasStream);
     console.log(canvasStream.getAudioTracks())
@@ -76,13 +76,13 @@ function Meet(props) {
     selfieSegmentation.onResults(onResults);
 
     const sendToMediaPipe = async () => {
-      // if (!inputVideoRef.current.videoWidth) {
-      //   console.log(inputVideoRef.current.videoWidth);
-      //   requestAnimationFrame(sendToMediaPipe);
-      // } else {
+      if (!inputVideoRef.current.videoWidth) {
+        console.log(inputVideoRef.current.videoWidth);
+        requestAnimationFrame(sendToMediaPipe);
+      } else {
         await selfieSegmentation.send({ image: inputVideoRef.current });
         requestAnimationFrame(sendToMediaPipe);
-      // }
+      }
     };
   }, []);
 
