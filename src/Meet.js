@@ -1,6 +1,7 @@
 import MainScreen from "./components/MainScreen/MainScreen.component";
 import firepadRef, { db, userName } from "./server/firebase";
 import "./App.css";
+// import bg1 from "bg1.jpeg";
 import { useEffect, useRef } from "react";
 import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 import {
@@ -28,16 +29,16 @@ function Meet(props) {
   };
   useEffect(async () => {
     contextRef.current = canvasRef.current.getContext("2d");
-    
+
     const canvasStream = canvasRef.current.captureStream(15);
     canvasStream.getVideoTracks()[0].enabled = false;
     props.setCanvasStream(canvasStream);
     console.log(canvasStream.getAudioTracks())
-    
+
     const videoStream = await getUserStream();
     videoStream.getVideoTracks()[0].enabled = false;
     props.setMainStream(videoStream);
-    
+
     getUserStream().then((stream) => {
       console.log(stream.getAudioTracks())
       // stream.getAudioTracks()[0].enabled = false;
@@ -136,8 +137,11 @@ function Meet(props) {
     );
     // Only overwrite existing pixels.
     contextRef.current.globalCompositeOperation = "source-out";
-    contextRef.current.fillStyle = "#00FF00";
-    contextRef.current.fillRect(
+    // contextRef.current.fillStyle = "#00FF00";
+    var img = new Image();
+    img.src = './bg1.jpeg';
+    contextRef.current.drawImage(
+      img,
       0,
       0,
       canvasRef.current.width,
