@@ -2,7 +2,7 @@ import MainScreen from "./components/MainScreen/MainScreen.component";
 import firepadRef, { db, userName } from "./server/firebase";
 import "./App.css";
 // import bg1 from "bg1.jpeg";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 import {
   setCanvasStream,
@@ -19,6 +19,23 @@ function Meet(props) {
   const canvasRef = useRef();
   const contextRef = useRef();
 
+  //usestate to store iamge name
+  // const [imageName, setImageName] = useState();
+  //function to set image name
+  // const onBg1Click = () => {
+  //   setImageName("bg1.jpeg");
+  //   alert(imageName)
+  //   redraw()
+  // };
+  function redraw(){
+    contextRef.current.clearRect(0,0,canvasRef.current.width,canvasRef.current.width);
+    contextRef.current.beginPath();
+  }
+  // const onBg2Click = () => {
+  //   setImageName("bg2.jpeg");
+  //   alert(imageName)
+  //   redraw()
+  // };
   const getUserStream = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -165,6 +182,9 @@ function Meet(props) {
   return (
     <div className="Meet">
       <MainScreen />
+      {/* <button onClick={onBg1Click}>bg1</button>
+      <button onClick={onBg2Click}>bg2</button> */}
+      {props.mainStream}
       <div style={{ display: "none" }}>
         <video autoPlay ref={inputVideoRef} audio={false} />
         <canvas ref={canvasRef} width={480} height={360} />
